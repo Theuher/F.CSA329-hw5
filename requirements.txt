@@ -1,0 +1,9 @@
+# Chapter 6 Exercise Requirements
+# Software Engineering for Absolute Beginners
+
+# SQLite3 is included with Python standard library
+# No external packages required for basic database operations
+
+# Optional: For enhanced database visualization
+# sqlite-viewer  # Install via: pip install sqlite-viewer
+
