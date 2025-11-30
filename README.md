@@ -16,6 +16,7 @@
 
 - `database_design.py` - Үндсэн өгөгдлийн сангийн класс болон CRUD үйлдлүүд
 - `database_queries.py` - Төрөл бүрийн SQL хүсэлтүүдийн жишээ
+- `view_members.py` - Гишүүдийн жагсаалтыг харах энгийн скрипт
 - `library.db` - SQLite өгөгдлийн сан (програм ажиллуулахад автоматаар үүснэ)
 
 ## Ашиглах заавар
@@ -41,6 +42,16 @@ python database_queries.py
 Энэ програм:
 - Төрөл бүрийн SQL хүсэлтүүдийг харуулна
 - JOIN, GROUP BY, WHERE зэрэг үйлдлүүдийг демонстрацилна
+
+### 3. Гишүүдийн жагсаалтыг харах
+
+```bash
+python view_members.py
+```
+
+Энэ програм:
+- Бүх гишүүдийн мэдээллийг харуулна
+- ID, нэр, имэйл, утас, элссэн огноо зэргийг харуулна
 
 ## Өгөгдлийн сангийн бүтэц
 
@@ -93,6 +104,7 @@ python database_queries.py
 ### Read (Унших)
 - `get_all_authors()` - Бүх зохиолчдыг авах
 - `get_all_books()` - Бүх номыг авах
+- `get_all_members()` - Бүх гишүүдийг авах
 - `get_books_by_author()` - Зохиолчийн номыг авах
 - `get_member_borrowings()` - Гишүүний зээлдүүлэлтийг авах
 
@@ -118,6 +130,22 @@ python database_queries.py
 
 - Python 3.6+ 
 - SQLite3 (Python-тай хамт ирдэг)
+
+## Өгөгдөл харах функцүүд
+
+Програмд дараах display функцүүд байна:
+
+- `display_authors(db)` - Бүх зохиолчдыг форматлагдсан байдлаар харуулна
+- `display_books(db)` - Бүх номыг форматлагдсан байдлаар харуулна
+- `display_members(db)` - Бүх гишүүдийг форматлагдсан байдлаар харуулна
+
+Жишээ:
+```python
+from database_design import DatabaseManager, display_members
+
+with DatabaseManager("library.db") as db:
+    display_members(db)
+```
 
 ## Нэмэлт мэдээлэл
 

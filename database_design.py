@@ -186,6 +186,12 @@ class DatabaseManager:
         """, (author_id,))
         return cursor.fetchall()
     
+    def get_all_members(self) -> List[Tuple]:
+        """Retrieve all members from the database."""
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM members ORDER BY last_name, first_name")
+        return cursor.fetchall()
+    
     def get_member_borrowings(self, member_id: int) -> List[Tuple]:
         """Get all books borrowed by a member."""
         cursor = self.conn.cursor()
@@ -306,6 +312,24 @@ def display_books(db: DatabaseManager):
     print()
 
 
+def display_members(db: DatabaseManager):
+    """Display all members in a formatted way."""
+    print("\n" + "="*60)
+    print("MEMBERS")
+    print("="*60)
+    members = db.get_all_members()
+    if members:
+        for member in members:
+            print(f"ID: {member['member_id']:3d} | "
+                  f"{member['first_name']} {member['last_name']:20s} | "
+                  f"Email: {member['email']:30s} | "
+                  f"Phone: {member['phone'] or 'N/A':15s} | "
+                  f"Joined: {member['join_date']}")
+    else:
+        print("No members found.")
+    print()
+
+
 if __name__ == "__main__":
     # Example usage of the database
     print("="*60)
@@ -342,6 +366,7 @@ if __name__ == "__main__":
         # Display data
         display_authors(db)
         display_books(db)
+        display_members(db)
         
         # Demonstrate borrowing (only if members were added successfully)
         print("\n--- Borrowing Books ---")
